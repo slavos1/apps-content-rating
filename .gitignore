@@ -1,0 +1,9 @@
+.venv/
+x.dump*
+ratings.adoc
+ratings.dat
+ratings.html
+ratings.pdf
+*.pyc
+log/
+myapps.md

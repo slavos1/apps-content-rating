@@ -1,0 +1,26 @@
+= List of installed games and their content rating
+ifdef::backend-html5[]
+:toc: left
+:star: ⭐
+endif::[]
+ifndef::backend-html5[]
+:star: stars
+endif::[]
+
+There are {{ apps|length }} analyzed apps here.
+
+== Apps
+
+{% if ignore %}
+Apps with these ratings are not shown:
+{% for i in ignore %}
+* "{{ i }}"
+{% endfor %}
+{% endif %}
+
+{% for rating, apps_in_rating in apps|groupby("content_rating") %}
+=== Rating "{{rating}}" ({{apps_in_rating|length}} apps)
+{% for app in apps_in_rating|sorted("name") %}
+. {{app.url}}[{{app.original_name or app.name}},window=_blank] by https://play.google.com{{ app.developer.url}}[{{ app.developer.name }},window=_blank]{% if app.star_rating %} ({{app.star_rating}} {star}){% endif %} -- "{{app.description}}"
+{% endfor %}
+{% endfor %}

@@ -1,0 +1,18 @@
+= Notes
+
+Parses Markdown export from https://play.google.com/store/apps/details?id=de.onyxbits.listmyapps[List My Apps] to check for each app's content rating.
+
+== Steps
+
+. install "List My Apps" app on your device
+. open it, Select All and share to Google Drive as Markdown
+. download the Markdown file from Google Drive to a local file "myapps.md"
+. `make clean; make -j2`
+
+You will end up with HTML and PDF file.
+
+== Prerequisites
+
+. run once: `python -m venv .venv && source .venv/bin/activate && pip install -U pip && pip install -r requirements.txt`
+. `asciidoctor`
+. `asciidoctor-pdf`

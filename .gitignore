@@ -6,4 +6,6 @@ ratings.html
 ratings.pdf
 *.pyc
 log/
-myapps.md
+myapps*.md
+report.html
+assets/style.css

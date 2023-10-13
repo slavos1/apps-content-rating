@@ -1,4 +1,4 @@
-= List of installed games and their content rating
+= App rating analysis
 ifdef::backend-html5[]
 :toc: left
 :star: ⭐
@@ -7,20 +7,22 @@ ifndef::backend-html5[]
 :star: stars
 endif::[]
 
-There are {{ apps|length }} analyzed apps here.
+List of installed games and their content rating.
 
-== Apps
+== Overview
 
-{% if ignore %}
+There are *{{ apps|length }}* apps analyzed here.{% if ignore %}
 Apps with these ratings are not shown:
 {% for i in ignore %}
-* "{{ i }}"
+* "{{ i.label }}"
 {% endfor %}
 {% endif %}
 
-{% for rating, apps_in_rating in apps|groupby("content_rating") %}
-=== Rating "{{rating}}" ({{apps_in_rating|length}} apps)
-{% for app in apps_in_rating|sorted("name") %}
-. {{app.url}}[{{app.original_name or app.name}},window=_blank] by https://play.google.com{{ app.developer.url}}[{{ app.developer.name }},window=_blank]{% if app.star_rating %} ({{app.star_rating}} {star}){% endif %} -- "{{app.description}}"
+For more about meaning of ratings, see https://support.google.com/googleplay/answer/6209544?visit_id=638327649363597050-1150442459&p=appgame_ratings&rd=1#zippy=%2Cother-countries%2Caustralia-games-only%2Ceurope-middle-east[Apps & Games content ratings on Google Play].
+
+{% for rating, apps_in_rating in apps|groupby("rating_order") %}
+== Apps with "{{rating.label}}" rating ({{apps_in_rating|length}})
+{% for app in apps_in_rating|sorted("name_order") %}
+. {{app.url}}[{{app.original_name or app.name}},window=_blank] by {% if app.developer %}https://play.google.com{{ app.developer.url}}[{{ app.developer.name }},window=_blank]{% else %}n/a{% endif %}{% if app.star_rating %} ({{app.star_rating}} {star}){% endif %}{% if app.description %} -- "{{app.description}}"{% endif %} [`id={{app.play_store_id}}`]
 {% endfor %}
 {% endfor %}
